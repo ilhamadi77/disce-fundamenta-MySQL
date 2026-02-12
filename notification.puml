@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+entity User{
+    * id VARCHAR(100) <<PK>>
+    --
+    * name VARCHAR(255)
+}
+
+entity Notification{
+    * id INT AUTO INCREMENT <<PK>>
+    --
+    * title VARCHAR(255)
+    * detail TEXT
+    * created_at TIMESTAMP
+    --
+    user_id VARCHAR(100) <<FK>>
+    category_id VARCHAR(100) <<FK>>
+}
+
+entity Category{
+    * id VARCHAR(100) <<PK>>
+    --
+    * name VARCHAR(100)
+}
+
+entity NotificationRead{
+    * id INT AUTO INCREMENT <<PK>>
+    --
+    * is_read BOOLEAN
+    --
+    * user_id VARCHAR(100) <<FK>>
+    * notification_id INT <<FK>>
+}
+
+User ||--o{ Notification
+Category ||--o{ Notification
+User ||--o{ NotificationRead
+Notification ||--o{ NotificationRead
+
+@enduml
